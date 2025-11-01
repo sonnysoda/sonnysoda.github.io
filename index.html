@@ -1,301 +1,81 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>YORUSHIKLE: 每日 Yorushika 猜歌游戏</title>
-  <link rel="icon" href="favicon (1).ico" type="image/png">
-  <!-- 引入 Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Noto+Sans+SC:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    /* 全局样式 */
-    body {
-      margin: 0;
-      padding: 0;
-      background: url('wp8907820.jpg') no-repeat center center fixed;
-      background-size: cover;
-      font-family: 'Noto Sans SC', sans-serif;
-      position: relative;
-      text-align: center;
-      color: #fdfdfd;
-    }
-    body::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0, 0, 0, 0.55);
-      z-index: -1;
-    }
-    /* 主容器：半透明、模糊背景与艺术边框 */
-    .game-container {
-      width: 90%;
-      max-width: 900px;
-      margin: 40px auto;
-      padding: 30px;
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 15px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    }
-    /* 标题区域 */
-    .title-container {
-      background: rgba(255, 255, 255, 0.2);
-      display: inline-block;
-      padding: 20px 40px;
-      border-radius: 8px;
-      margin-bottom: 10px;
-      border: 2px solid rgba(255,255,255,0.4);
-    }
-    .title {
-      font-size: 64px;
-      font-family: 'Playfair Display', serif;
-      color: #fdfdfd;
-      margin: 0;
-      text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
-    }
-    .description {
-      font-size: 20px;
-      color: #ddd;
-      margin: 10px 0 20px;
-    }
-    .logo img {
-      max-width: 100px;
-      display: block;
-      margin: 0 auto 20px;
-      filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.5));
-    }
-    /* 按钮样式：渐变背景、圆角、阴影与平滑过渡 */
-    button {
-      background: linear-gradient(135deg, #ff7e5f, #feb47b);
-      color: #fff;
-      border: none;
-      padding: 12px 25px;
-      margin: 10px;
-      border-radius: 25px;
-      cursor: pointer;
-      font-size: 16px;
-      transition: background 0.3s, transform 0.3s;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-    }
-    button:hover {
-      background: linear-gradient(135deg, #feb47b, #ff7e5f);
-      transform: scale(1.05);
-    }
-    /* 输入框美化 */
-    .guess-input {
-      width: calc(100% - 24px);
-      padding: 12px;
-      margin: 10px auto;
-      border-radius: 8px;
-      border: 1px solid rgba(255,255,255,0.4);
-      font-size: 16px;
-      display: block;
-      background: rgba(255,255,255,0.2);
-      color: #fff;
-      outline: none;
-      transition: border 0.3s;
-    }
-    .guess-input:focus {
-      border: 1px solid #ff7e5f;
-    }
-    /* 音频片段区域 */
-    .audio-segments {
-      margin-top: 20px;
-    }
-    .segment {
-      margin: 20px 0;
-      padding: 10px;
-      border: 1px solid rgba(255,255,255,0.3);
-      border-radius: 10px;
-      background: rgba(0,0,0,0.3);
-      box-shadow: 0 2px 6px rgba(0,0,0,0.4);
-    }
-    .segment p {
-      margin: 0 0 10px;
-      font-size: 18px;
-    }
-    /* 游戏信息 */
-    .game-info p {
-      margin: 5px 0;
-      font-size: 18px;
-      color: #eee;
-    }
-    /* Footer 样式 */
-    .footer {
-      text-align: center;
-      margin-top: 30px;
-      font-size: 14px;
-      color: #ccc;
-    }
-    /* 响应式设计 */
-    @media screen and (max-width: 600px) {
-      .title {
-        font-size: 36px;
-      }
-      button {
-        padding: 10px 20px;
-        font-size: 14px;
-      }
-      .guess-input {
-        font-size: 14px;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的超酷博客</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
-<div class="game-container">
-  <!-- Logo Section -->
-  <div class="logo">
-    <img src="apple-touch-icon.png" alt="Yorushika Logo">
-  </div>
+    <div id="background-animation"></div> <!-- 背景动画容器 -->
 
-  <!-- 标题区域 -->
-  <div class="title-container">
-    <h1 class="title">YORUSHIKLE</h1>
-  </div>
-  <p class="description">a daily Yorushika guess game</p>
+    <header class="main-header">
+        <nav class="main-nav">
+            <a href="#" class="nav-item active" data-target="home">首页</a>
+            <a href="#" class="nav-item" data-target="posts">文章</a>
+            <a href="#" class="nav-item" data-target="about">关于我</a>
+            <a href="#" class="nav-item" data-target="contact">联系</a>
+        </nav>
+        <h1 class="site-title">未来之境</h1>
+    </header>
 
-  <!-- 游戏信息 -->
-  <div class="game-info">
-    <p id="songInfo">今天的挑战: 歌曲 1/5</p>
-    <p id="dayInfo">Day #1</p>
-  </div>
+    <main id="content-container" class="content-container">
+        <!-- 页面内容将通过JavaScript加载到这里 -->
+        <section id="home" class="page-section active">
+            <div class="hero-content">
+                <h2>欢迎来到我的数字世界</h2>
+                <p>在这里，我分享我的思考、作品和探索。准备好进入一个充满创意的旅程了吗？</p>
+                <button class="cta-button" data-target="posts">探索文章</button>
+            </div>
+        </section>
 
-  <!-- 音频片段区域 -->
-  <div class="audio-segments">
-    <!-- 片段 1 -->
-    <div class="segment" id="segment1">
-      <p>片段 1/3</p>
-      <audio id="audioSegment1" src=""></audio>
-      <button onclick="playSegment(1)">播放片段1</button>
-    </div>
-    <!-- 片段 2 -->
-    <div class="segment" id="segment2" style="display:none;">
-      <p>片段 2/3</p>
-      <audio id="audioSegment2" src=""></audio>
-      <button onclick="playSegment(2)">播放片段2</button>
-    </div>
-    <!-- 片段 3 -->
-    <div class="segment" id="segment3" style="display:none;">
-      <p>片段 3/3</p>
-      <audio id="audioSegment3" src=""></audio>
-      <button onclick="playSegment(3)">播放片段3</button>
-    </div>
-  </div>
+        <section id="posts" class="page-section hidden">
+            <div class="section-header">
+                <h2>所有文章</h2>
+            </div>
+            <div class="post-list">
+                <!-- 文章列表将由JavaScript动态生成 -->
+            </div>
+        </section>
 
-  <!-- 猜歌输入区 -->
-  <div class="guess-section">
-    <input type="text" id="guessInput" placeholder="猜猜这首歌" class="guess-input">
-    <button onclick="submitGuess()">猜歌</button>
-    <button onclick="nextSegment()">下一片段</button>
-  </div>
+        <section id="about" class="page-section hidden">
+            <div class="section-header">
+                <h2>关于我</h2>
+            </div>
+            <div class="about-content">
+                <p>你好！我是一个对前端技术和数字创意充满热情的人。喜欢探索新的技术，并将它们应用到实际项目中。</p>
+                <p>我相信代码不仅仅是逻辑，更是一种艺术表达。我的目标是创造既美观又功能强大的用户体验。</p>
+                <p>除了敲代码，我还喜欢阅读、旅行和摄影。希望我的博客能给你带来一些启发！</p>
+            </div>
+        </section>
 
-  <!-- 歌名显示区 -->
-  <div class="song-name" id="songNameDisplay" style="display:none;">
-    <p>歌名：<span id="songName"></span></p>
-  </div>
+        <section id="contact" class="page-section hidden">
+            <div class="section-header">
+                <h2>联系我</h2>
+            </div>
+            <div class="contact-content">
+                <p>如果你有任何问题或想进行合作，欢迎通过以下方式联系我：</p>
+                <ul>
+                    <li>Email: <a href="mailto:your.email@example.com">your.email@example.com</a></li>
+                    <li>GitHub: <a href="https://github.com/your-github" target="_blank">your-github</a></li>
+                    <li>LinkedIn: <a href="https://linkedin.com/in/your-linkedin" target="_blank">your-linkedin</a></li>
+                </ul>
+                <form class="contact-form">
+                    <input type="text" placeholder="你的名字" required>
+                    <input type="email" placeholder="你的邮箱" required>
+                    <textarea placeholder="你的消息" rows="5" required></textarea>
+                    <button type="submit" class="cta-button">发送</button>
+                </form>
+            </div>
+        </section>
+    </main>
 
-  <!-- Footer Section -->
-  <footer class="footer">
-    <p>made by a n-buna fan</p>
-  </footer>
-</div>
+    <footer class="main-footer">
+        <p>&copy; 2023 我的超酷博客. All rights reserved.</p>
+    </footer>
 
-<script>
-  // 歌曲数据数组：每个对象包含歌名和三个音频片段的文件路径
-  const songs = [
-    { name: ["パレード", "Parade", "游行"], segments: ["1.1.mp3", "1.2.mp3", "1.3.mp3"] },
-    { name: ["败犬不需要安可", "負け犬にアンコールはいらない"], segments: ["2.1.mp3", "2.2.mp3", "2.3.mp3"] },
-    { name: ["嘘月"], segments: ["3.1.mp3", "3.2.mp3", "3.3.mp3"] },
-    { name: ["憂一乗", "夏一乘"], segments: ["4.1.mp3", "4.2.mp3", "4.3.mp3"] }
-  ];
-
-  let currentSong = 0;
-  let score = 0;
-  let currentSegment = 1;
-
-  // 初始化加载当前歌曲
-  function loadSong() {
-    currentSegment = 1;
-    document.getElementById('segment1').style.display = 'block';
-    document.getElementById('segment2').style.display = 'none';
-    document.getElementById('segment3').style.display = 'none';
-    document.getElementById('guessInput').value = '';
-    document.getElementById('songNameDisplay').style.display = 'none';
-
-    document.getElementById('audioSegment1').src = songs[currentSong].segments[0];
-    document.getElementById('audioSegment2').src = songs[currentSong].segments[1];
-    document.getElementById('audioSegment3').src = songs[currentSong].segments[2];
-
-    document.getElementById('songInfo').innerText = `今天的挑战: 歌曲 ${currentSong + 1}/5`;
-    document.getElementById('dayInfo').innerText = `Day #${currentSong + 1}`;
-  }
-
-  // 播放指定片段
-  function playSegment(segment) {
-    currentSegment = segment;
-    const audioElement = document.getElementById('audioSegment' + segment);
-    audioElement.play();
-  }
-
-  // 用户提交猜歌
-  function submitGuess() {
-    const guess = document.getElementById('guessInput').value.trim();
-    const guess_LowerCase = guess.toLowerCase();
-    alert(guess_LowerCase);
-    //alert(guess.toLowerCase() === songName.toLowerCase());
-    //alert(songs[currentSong].name.some(songName => guess.toLowerCase() === songName.toLowerCase()));
-    const isCorrect = songs[currentSong].name.some(songName => guess.toLowerCase() === songName.toLowerCase());
-
-    if (isCorrect) {
-      score++;
-      // 显示正确答案
-      document.getElementById('songName').innerText = songs[currentSong].name[0];
-      document.getElementById('songNameDisplay').style.display = 'block';
-      setTimeout(() => {
-        nextSong();
-      }, 1000);
-    } else {
-      alert("猜错了，再试试看吧！");
-      nextSong();
-    }
-  }
-
-  // 播放下一片段或结束当前歌曲
-  function nextSegment() {
-    if (currentSegment < 3) {
-      currentSegment++;
-      document.getElementById('segment' + currentSegment).style.display = 'block';
-      playSegment(currentSegment);
-    } else {
-      nextSong();
-    }
-  }
-
-  // 进入下一首歌曲，如果全部完成则显示得分页面
-  function nextSong() {
-    if (currentSong < songs.length - 1) {
-      currentSong++;
-      loadSong();
-    } else {
-      showResults();
-    }
-  }
-
-  // 显示最终得分页面
-  function showResults() {
-    document.body.innerHTML = `
-        <div style="text-align: center; padding: 50px; color: #fff;">
-          <h1>游戏结束</h1>
-          <p style="font-size: 24px;">你的得分：${score} / ${songs.length}</p>
-          <button onclick="location.reload()">再玩一次</button>
-        </div>
-      `;
-  }
-
-  // 页面加载完成后初始化第一首歌
-  window.onload = loadSong;
-</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script> <!-- 粒子动画库 -->
+    <script src="js/script.js"></script>
 </body>
 </html>

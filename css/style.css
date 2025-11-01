@@ -1,247 +1,504 @@
-/*! HTML5 Boilerplate v9.0.1 | MIT License | https://html5boilerplate.com/ */
-
-/* main.css 3.0.0 | MIT License | https://github.com/h5bp/main.css#readme */
-/*
- * What follows is the result of much research on cross-browser styling.
- * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
- * Kroc Camen, and the H5BP dev community and team.
- */
-
-/* ==========================================================================
-   Base styles: opinionated defaults
-   ========================================================================== */
-
-html {
-  color: #222;
-  font-size: 1em;
-  line-height: 1.4;
+/* 全局样式和变量 */
+:root {
+    --primary-color: #00bcd4; /* 青色 */
+    --secondary-color: #673ab7; /* 深紫 */
+    --accent-color: #ff4081; /* 粉红 */
+    --text-color: #e0e0e0;
+    --background-dark: #1a1a2e;
+    --background-light: #2c2c4d;
+    --font-stack: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    --border-radius: 8px;
+    --transition-speed: 0.5s ease-in-out;
 }
 
-/*
- * Remove text-shadow in selection highlight:
- * https://twitter.com/miketaylr/status/12228805301
- *
- * Customize the background color to match your design.
- */
-
-::-moz-selection {
-  background: #b3d4fc;
-  text-shadow: none;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-::selection {
-  background: #b3d4fc;
-  text-shadow: none;
+html, body {
+    height: 100%;
+    font-family: var(--font-stack);
+    color: var(--text-color);
+    line-height: 1.6;
+    overflow-x: hidden; /* 防止水平滚动 */
+    background-color: var(--background-dark);
 }
 
-/*
- * A better looking default horizontal rule
- */
-
-hr {
-  display: block;
-  height: 1px;
-  border: 0;
-  border-top: 1px solid #ccc;
-  margin: 1em 0;
-  padding: 0;
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-/*
- * Remove the gap between audio, canvas, iframes,
- * images, videos and the bottom of their containers:
- * https://github.com/h5bp/html5-boilerplate/issues/440
- */
-
-audio,
-canvas,
-iframe,
-img,
-svg,
-video {
-  vertical-align: middle;
+/* 背景动画容器 */
+#background-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* 确保在内容下方 */
+    background: linear-gradient(45deg, #0f0c29, #302b63, #24243e); /* 渐变背景 */
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite; /* 渐变动画 */
 }
 
-/*
- * Remove default fieldset styles.
- */
-
-fieldset {
-  border: 0;
-  margin: 0;
-  padding: 0;
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
-/*
- * Allow only vertical resizing of textareas.
- */
-
-textarea {
-  resize: vertical;
+/* 如果使用 particles.js，particles-js 容器会覆盖这个背景 */
+#particles-js {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
 }
 
-/* ==========================================================================
-   Author's custom styles
-   ========================================================================== */
-
-/* ==========================================================================
-   Helper classes
-   ========================================================================== */
-
-/*
- * Hide visually and from screen readers
- */
-
-.hidden,
-[hidden] {
-  display: none !important;
+/* 头部 */
+.main-header {
+    width: 100%;
+    padding: 20px 40px;
+    background: rgba(0, 0, 0, 0.4);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px); /* 毛玻璃效果 */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
 }
 
-/*
- * Hide only visually, but have it available for screen readers:
- * https://snook.ca/archives/html_and_css/hiding-content-for-accessibility
- *
- * 1. For long content, line feeds are not interpreted as spaces and small width
- *    causes content to wrap 1 word per line:
- *    https://medium.com/@jessebeach/beware-smushed-off-screen-accessible-text-5952a4c2cbfe
- */
-
-.visually-hidden {
-  border: 0;
-  clip: rect(0, 0, 0, 0);
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  white-space: nowrap;
-  width: 1px;
-  /* 1 */
+.site-title {
+    font-size: 3em;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: 2px;
+    background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: textGlow 3s ease-in-out infinite alternate;
 }
 
-/*
- * Extends the .visually-hidden class to allow the element
- * to be focusable when navigated to via the keyboard:
- * https://www.drupal.org/node/897638
- */
-
-.visually-hidden.focusable:active,
-.visually-hidden.focusable:focus {
-  clip: auto;
-  height: auto;
-  margin: 0;
-  overflow: visible;
-  position: static;
-  white-space: inherit;
-  width: auto;
+@keyframes textGlow {
+    0% { text-shadow: 0 0 5px var(--primary-color); }
+    100% { text-shadow: 0 0 20px var(--accent-color), 0 0 30px var(--primary-color); }
 }
 
-/*
- * Hide visually and from screen readers, but maintain layout
- */
-
-.invisible {
-  visibility: hidden;
+/* 导航 */
+.main-nav {
+    display: flex;
+    gap: 30px;
 }
 
-/*
- * Clearfix: contain floats
- *
- * The use of `table` rather than `block` is only necessary if using
- * `::before` to contain the top-margins of child elements.
- */
-
-.clearfix::before,
-.clearfix::after {
-  content: "";
-  display: table;
+.nav-item {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 1.2em;
+    padding: 10px 15px;
+    border-radius: var(--border-radius);
+    transition: all var(--transition-speed);
+    position: relative;
+    overflow: hidden;
 }
 
-.clearfix::after {
-  clear: both;
+.nav-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: all var(--transition-speed);
 }
 
-/* ==========================================================================
-   EXAMPLE Media Queries for Responsive Design.
-   These examples override the primary ('mobile first') styles.
-   Modify as content requires.
-   ========================================================================== */
-
-@media only screen and (min-width: 35em) {
-  /* Style adjustments for viewports that meet the condition */
+.nav-item:hover::before {
+    left: 100%;
 }
 
-@media print,
-  (-webkit-min-device-pixel-ratio: 1.25),
-  (min-resolution: 1.25dppx),
-  (min-resolution: 120dpi) {
-  /* Style adjustments for high resolution devices */
+.nav-item:hover {
+    color: var(--primary-color);
+    transform: translateY(-3px) scale(1.05);
+    text-shadow: 0 0 10px var(--primary-color);
 }
 
-/* ==========================================================================
-   Print styles.
-   Inlined to avoid the additional HTTP request:
-   https://www.phpied.com/delay-loading-your-print-css/
-   ========================================================================== */
-
-@media print {
-  *,
-  *::before,
-  *::after {
-    background: #fff !important;
-    color: #000 !important;
-    /* Black prints faster */
-    box-shadow: none !important;
-    text-shadow: none !important;
-  }
-
-  a,
-  a:visited {
-    text-decoration: underline;
-  }
-
-  a[href]::after {
-    content: " (" attr(href) ")";
-  }
-
-  abbr[title]::after {
-    content: " (" attr(title) ")";
-  }
-
-  /*
-   * Don't show links that are fragment identifiers,
-   * or use the `javascript:` pseudo protocol
-   */
-  a[href^="#"]::after,
-  a[href^="javascript:"]::after {
-    content: "";
-  }
-
-  pre {
-    white-space: pre-wrap !important;
-  }
-
-  pre,
-  blockquote {
-    border: 1px solid #999;
-    page-break-inside: avoid;
-  }
-
-  tr,
-  img {
-    page-break-inside: avoid;
-  }
-
-  p,
-  h2,
-  h3 {
-    orphans: 3;
-    widows: 3;
-  }
-
-  h2,
-  h3 {
-    page-break-after: avoid;
-  }
+.nav-item.active {
+    background: var(--primary-color);
+    color: var(--background-dark);
+    box-shadow: 0 0 15px var(--primary-color);
+    transform: scale(1.1);
 }
 
+/* 主要内容容器 */
+.content-container {
+    flex-grow: 1;
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+    background: rgba(44, 44, 77, 0.7); /* 半透明背景 */
+    border-radius: var(--border-radius);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden; /* 隐藏超出内容 */
+}
+
+/* 页面区块 */
+.page-section {
+    position: absolute;
+    width: calc(100% - 40px); /* 减去padding */
+    padding: 20px;
+    top: 20px;
+    left: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: opacity var(--transition-speed), transform var(--transition-speed), visibility var(--transition-speed);
+}
+
+.page-section.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    position: relative; /* 激活的区块回到文档流 */
+}
+
+/* 英雄区内容 */
+.hero-content {
+    text-align: center;
+    padding: 80px 20px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: var(--border-radius);
+    animation: fadeInScale 1s ease-out forwards;
+}
+
+.hero-content h2 {
+    font-size: 3.5em;
+    margin-bottom: 20px;
+    color: var(--accent-color);
+    text-shadow: 0 0 10px rgba(255, 64, 129, 0.7);
+}
+
+.hero-content p {
+    font-size: 1.3em;
+    margin-bottom: 40px;
+    color: var(--text-color);
+}
+
+/* CTA 按钮 */
+.cta-button {
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1em;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 188, 212, 0.4);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.cta-button::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateX(-100%);
+    transition: transform 0.4s ease-out;
+    z-index: -1;
+}
+
+.cta-button:hover::after {
+    transform: translateX(0);
+}
+
+.cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 188, 212, 0.6);
+}
+
+/* 区块头部 */
+.section-header {
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.section-header h2 {
+    font-size: 2.5em;
+    color: var(--primary-color);
+    text-shadow: 0 0 8px rgba(0, 188, 212, 0.5);
+}
+
+/* 文章列表 (示例样式) */
+.post-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.post-card {
+    background: var(--background-light);
+    border-radius: var(--border-radius);
+    padding: 25px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+}
+
+.post-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at top left, rgba(255,255,255,0.05) 0%, transparent 70%);
+    transition: opacity 0.3s ease;
+    opacity: 0;
+}
+
+.post-card:hover::before {
+    opacity: 1;
+}
+
+.post-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5), 0 0 20px var(--secondary-color);
+}
+
+.post-card h3 {
+    font-size: 1.6em;
+    margin-bottom: 10px;
+    color: var(--accent-color);
+}
+
+.post-card p {
+    font-size: 0.95em;
+    color: var(--text-color);
+    margin-bottom: 15px;
+}
+
+.post-card .read-more {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    position: relative;
+}
+
+.post-card .read-more::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: var(--primary-color);
+    bottom: -3px;
+    left: 0;
+    transform: scaleX(0);
+    transform-origin: bottom right;
+    transition: transform 0.3s ease-out;
+}
+
+.post-card .read-more:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+/* 关于我/联系页面 */
+.about-content, .contact-content {
+    font-size: 1.1em;
+    line-height: 1.8;
+}
+
+.contact-content ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 30px;
+}
+
+.contact-content li {
+    margin-bottom: 10px;
+}
+
+.contact-content a {
+    color: var(--primary-color);
+    text-decoration: none;
+    position: relative;
+}
+
+.contact-content a::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    background-color: var(--primary-color);
+    bottom: -2px;
+    left: 0;
+    transform: scaleX(0);
+    transform-origin: bottom right;
+    transition: transform 0.3s ease-out;
+}
+
+.contact-content a:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 30px;
+    background: var(--background-light);
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form textarea {
+    padding: 15px;
+    border: 1px solid var(--primary-color);
+    border-radius: var(--border-radius);
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-color);
+    font-size: 1em;
+    transition: all 0.3s ease;
+}
+
+.contact-form input[type="text"]:focus,
+.contact-form input[type="email"]:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 10px rgba(255, 64, 129, 0.5);
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+.contact-form textarea {
+    resize: vertical;
+}
+
+/* 底部 */
+.main-footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    background: rgba(0, 0, 0, 0.4);
+    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(5px);
+    font-size: 0.9em;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* 动画 */
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.post-card {
+    animation: slideInUp 0.6s ease-out forwards;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .main-header {
+        flex-direction: column;
+        padding: 15px 20px;
+    }
+
+    .site-title {
+        font-size: 2.5em;
+    }
+
+    .main-nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .nav-item {
+        font-size: 1em;
+        padding: 8px 12px;
+    }
+
+    .content-container {
+        margin: 20px auto;
+        padding: 15px;
+    }
+
+    .hero-content {
+        padding: 60px 15px;
+    }
+
+    .hero-content h2 {
+        font-size: 2.5em;
+    }
+
+    .hero-content p {
+        font-size: 1.1em;
+    }
+
+    .section-header h2 {
+        font-size: 2em;
+    }
+
+    .post-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .site-title {
+        font-size: 2em;
+    }
+    .hero-content h2 {
+        font-size: 2em;
+    }
+    .hero-content p {
+        font-size: 1em;
+    }
+    .cta-button {
+        padding: 12px 25px;
+        font-size: 1em;
+    }
+}
