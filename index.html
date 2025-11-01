@@ -242,7 +242,10 @@
   // 用户提交猜歌
   function submitGuess() {
     const guess = document.getElementById('guessInput').value.trim();
-    alert(guess);
+    const guess_LowerCase = guess.toLowerCase();
+    alert(guess_LowerCase);
+    //alert(guess.toLowerCase() === songName.toLowerCase());
+    //alert(songs[currentSong].name.some(songName => guess.toLowerCase() === songName.toLowerCase()));
     const isCorrect = songs[currentSong].name.some(songName => guess.toLowerCase() === songName.toLowerCase());
 
     if (isCorrect) {
