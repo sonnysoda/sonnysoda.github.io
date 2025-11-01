@@ -1,0 +1,54 @@
+#
+# 这个文件包含了所有站点的配置信息
+#
+
+# 站点名称
+name: "SONNYSODA'S BLOG"
+
+# 站点 slogan
+description: "一个关于网络安全、编程与探索的博客。"
+
+# 站点 logo (可选)
+logo: 'assets/images/logo.png'
+
+# 网站主 URL，用于 SEO
+url: https://sonnysoda.github.io
+
+# 作者信息
+author:
+  name: SonnySoda
+  avatar: 'assets/images/avatar.jpeg' # 建议替换成你自己的头像
+  email: your-email@example.com
+  github: https://github.com/sonnysoda # 你的 GitHub 主页
+  bio: "探索技术的边界"
+
+# 导航栏链接
+navigation:
+  - title: 首页
+    url: /
+  - title: 文章
+    url: /posts
+  - title: 关于
+    url: /about
+
+# 社交链接，会显示在页脚
+social:
+  github: https://github.com/sonnysoda
+
+# Jekyll 设置
+permalink: /:title/
+paginate: 6
+paginate_path: /posts/page:num/
+
+# Markdown 渲染引擎
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+# 插件
+plugins:
+  - jekyll-paginate
+
+# 排除文件
+exclude: [ "LICENSE", "README.md", "CNAME", "vendor" ]

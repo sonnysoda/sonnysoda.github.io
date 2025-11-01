@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }} - {{ site.name }}</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <a href="/" class="site-title">{{ site.name }}</a>
+            <nav class="site-nav">
+                {% for item in site.navigation %}
+                    <a href="{{ item.url }}">{{ item.title }}</a>
+                {% endfor %}
+            </nav>
+        </div>
+    </header>
+
+    <main class="site-main">
+        {{ content }}
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; {{ "now" | date: "%Y" }} {{ site.author.name }}. All rights reserved.</p>
+            <div class="social-links">
+                <a href="{{ site.social.github }}" target="_blank">GitHub</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+    <script>
+        new WOW().init();
+    </script>
+</body>
+</html>

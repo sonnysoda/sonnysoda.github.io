@@ -1,0 +1,224 @@
+/* General Body Styles */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    color: #4a4a4a;
+    background-color: #f8f9fa;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header */
+.site-header {
+    background: #fff;
+    border-bottom: 1px solid #e6e6e6;
+    padding: 15px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.site-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.site-title {
+    font-size: 1.5em;
+    font-weight: bold;
+    text-decoration: none;
+    color: #333;
+}
+
+.site-nav a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #555;
+    font-size: 1.1em;
+    transition: color 0.3s ease;
+}
+
+.site-nav a:hover {
+    color: #007bff;
+}
+
+/* Main Content */
+.site-main {
+    flex-grow: 1;
+}
+
+/* Hero Section on Homepage */
+.hero {
+    background: linear-gradient(135deg, #007bff 0%, #00d2ff 100%);
+    color: white;
+    text-align: center;
+    padding: 100px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-title {
+    font-size: 3.5em;
+    margin-bottom: 0.5em;
+}
+
+.hero-description {
+    font-size: 1.5em;
+    opacity: 0.9;
+    margin-bottom: 2em;
+}
+
+.github-link {
+    display: inline-flex;
+    align-items: center;
+    background-color: #fff;
+    color: #333;
+    padding: 12px 25px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.github-link:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+.github-logo {
+    width: 24px;
+    height: 24px;
+    margin-right: 12px;
+}
+
+
+/* Post List */
+.section-title {
+    text-align: center;
+    font-size: 2.2em;
+    margin-top: 60px;
+    margin-bottom: 40px;
+}
+
+.post-list {
+    display: grid;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.post-item {
+    background: #fff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.post-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.post-item h3 a {
+    color: #333;
+    text-decoration: none;
+    font-size: 1.4em;
+}
+
+.post-meta {
+    color: #888;
+    font-size: 0.9em;
+    margin-top: 5px;
+}
+
+.read-more {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    background: #007bff;
+    color: #fff;
+    padding: 12px 25px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background: #0056b3;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* Post Page */
+.post-page {
+    background: #fff;
+    padding: 40px;
+    margin-top: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.post-title {
+    font-size: 2.5em;
+    margin-bottom: 0.5em;
+}
+
+.post-content {
+    font-size: 1.1em;
+}
+
+.post-content h2 {
+    font-size: 1.8em;
+    margin-top: 1.5em;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 0.3em;
+}
+
+.post-content code {
+    background-color: #eef;
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.post-content pre {
+    background-color: #2d2d2d;
+    color: #ccc;
+    padding: 1em;
+    border-radius: 5px;
+    overflow-x: auto;
+}
+
+/* Footer */
+.site-footer {
+    background: #333;
+    color: #ccc;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 40px;
+}
+
+.social-links a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 10px;
+}
